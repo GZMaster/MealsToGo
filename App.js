@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StatusBar, StyleSheet, Text, View, SafeAreaView, Platform } from 'react-native';
 
 export default function App() {
   return (
     <>
-      <SafeAreaView style={{ flex: 1, paddingTop: 25, }}>
+      <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
         <View style={{ padding: 16, backgroundColor: 'green', }}>
           <Text>search</Text>
         </View>
