@@ -20,12 +20,5 @@ const restaurantsTransform = (results = []) => {
     };
   });
 
-  return results;
+  return camelize(mappedResults);
 };
-
-restaurantsRequest()
-  .then(restaurantsTransform)
-  .then((transformedResponse) => {})
-  .catch((err) => {
-    console.log("error");
-  });
