@@ -40,7 +40,13 @@ const CreateScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
   return {
     tabBarIcon: ({ size, color }) => (
-      <Ionicons name={iconName} size={size} color={color} />
+      <Ionicons
+        name={iconName}
+        size={size}
+        color={color}
+        activeTintColor={"tomato"}
+        inactiveTintColor={"gray"}
+      />
     ),
   };
 };
@@ -64,13 +70,7 @@ export default function App() {
         <LocationContextProvider>
           <RestaurantsContextProvider>
             <NavigationContainer>
-              <Tab.Navigator
-                screenOptions={CreateScreenOptions}
-                tabBarOptions={{
-                  activeTintColor: "tomato",
-                  inactiveTintColor: "gray",
-                }}
-              >
+              <Tab.Navigator screenOptions={CreateScreenOptions}>
                 <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
                 <Tab.Screen name="Map" component={Map} />
                 <Tab.Screen name="Settings" component={Settings} />
