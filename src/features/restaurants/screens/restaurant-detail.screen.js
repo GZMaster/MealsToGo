@@ -29,7 +29,7 @@ export const RestaurantDetailScreen = ({ route }) => {
               />
             )}
             expanded={breakfastExpanded}
-            onPress={() => setBreakfastExpanded(!breakfastExpanded)}
+            onPress={() => setBreakfastExpanded(!breakfastExpanded)} 
           >
             <List.Item title="Eggs Benedict" />
             <List.Item title="Toast" />
