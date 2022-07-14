@@ -1,8 +1,7 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
 import { ThemeProvider } from "styled-components/native";
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
   useFonts as useOswald,
   Oswald_400Regular,
@@ -15,34 +14,17 @@ import { FavouritesContextProvider } from "./src/services/favourites/favourites.
 import { Navigation } from "./src/infrastructure/navigation/index";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA71rd6UgyKmldRzynNwZ1pyCfSgnY2ss0",
-  authDomain: "mealstogo-c23dc.firebaseapp.com",
-  projectId: "mealstogo-c23dc",
-  storageBucket: "mealstogo-c23dc.appspot.com",
-  messagingSenderId: "607882177935",
-  appId: "1:607882177935:web:c22b9f81aeb257ebbbaffa",
-};
-
-if (!getApps.length) {
-  initializeApp(firebaseConfig);
-}
-
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const auth = getAuth();
+  const firebaseConfig = {
+    apiKey: "AIzaSyA71rd6UgyKmldRzynNwZ1pyCfSgnY2ss0",
+    authDomain: "mealstogo-c23dc.firebaseapp.com",
+    projectId: "mealstogo-c23dc",
+    storageBucket: "mealstogo-c23dc.appspot.com",
+    messagingSenderId: "607882177935",
+    appId: "1:607882177935:web:c22b9f81aeb257ebbbaffa",
+  };
 
-  useEffect(() => {
-    setTimeout(() => {
-      signInWithEmailAndPassword(auth, "admin@test.com", "testadmin")
-        .then((user) => {
-          setIsAuthenticated(true);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    }, 2000);
-  }, []);
+  const app = initializeApp(firebaseConfig);
 
   let [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -59,7 +41,7 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AuthenticationContextProvider>
+        <AuthenticationContextProvider app={app}>
           <FavouritesContextProvider>
             <LocationContextProvider>
               <RestaurantsContextProvider>

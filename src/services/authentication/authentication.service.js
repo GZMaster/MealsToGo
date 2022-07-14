@@ -1,8 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-const auth = getAuth();
-
-const loginRequest = (email, password) =>
+const loginRequest = (app, email, password) =>
   signInWithEmailAndPassword(auth, email, password)
     .then((user) => {
       setIsAuthenticated(true);
