@@ -1,6 +1,7 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase.config";
 
-const loginRequest = (app, email, password) =>
+export const loginRequest = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((user) => {
       setIsAuthenticated(true);
@@ -8,3 +9,4 @@ const loginRequest = (app, email, password) =>
     .catch((e) => {
       console.log(e);
     });
+};

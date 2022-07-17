@@ -3,14 +3,14 @@ import { loginRequest } from "./authentication.service";
 
 export const AuthenticationContext = createContext();
 
-export const AuthenticationContextProvider = ({ app, children }) => {
+export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   const onLogin = (email, password) => {
     setIsLoading(true);
-    loginRequest(app, email, password)
+    loginRequest(email, password)
       .then((u) => {
         setUser(u);
         setIsLoading(false);
@@ -24,6 +24,7 @@ export const AuthenticationContextProvider = ({ app, children }) => {
   return (
     <AuthenticationContext.Provider
       value={{
+        isAuthenticated: !!user,
         user,
         isLoading,
         error,
