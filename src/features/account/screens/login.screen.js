@@ -12,7 +12,7 @@ import {
 } from "../components/account.styles";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const LoginScreen = () => {
+export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { onLogin, error } = useContext(AuthenticationContext);

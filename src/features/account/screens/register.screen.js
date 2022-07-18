@@ -12,11 +12,12 @@ import {
 } from "../components/account.styles";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
 
-export const LoginScreen = () => {
+export const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin, error } = useContext(AuthenticationContext);
-
+  const [repeatedPssword, setRepeadedPassword] = useState("");
+  const { onRegister, error } = useContext(AuthenticationContext);
+ 
   return (
     <AccountBackground>
       <AccountCover />
@@ -40,6 +41,16 @@ export const LoginScreen = () => {
             onChangeText={(p) => setPassword(p)}
           />
         </Spacer>
+        <Spacer size="large">
+          <AuthTextInput
+            label="Repeat Password"
+            value={repeatedPssword}
+            textContentType="password"
+            secureTextEntry
+            autoCapitalize="none"
+            onChangeText={(r) => setRepeadedPassword(r)}
+          />
+        </Spacer>
         {error && (
           <ErrorContainer size="large">
             <Text variant="error">{error}</Text>
@@ -47,11 +58,11 @@ export const LoginScreen = () => {
         )}
         <Spacer size="large">
           <AuthButton
-            icon="lock-open-outline"
+            icon="email-outline"
             mode="contained"
-            onPress={() => onLogin(email, password)}
+            onPress={() => onRegister(email, password, repeatedPssword)}
           >
-            Login
+            Register
           </AuthButton>
         </Spacer>
       </LoginContainer>
