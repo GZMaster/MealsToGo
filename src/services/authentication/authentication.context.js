@@ -12,7 +12,7 @@ export const AuthenticationContextProvider = ({ children }) => {
 
   onAuthStateChanged(auth, (usr) => {
     if (usr) {
-      setUser(user);
+      setUser(usr);
       setIsLoading(false);
     } else {
       setIsLoading(false);
@@ -51,13 +51,8 @@ export const AuthenticationContextProvider = ({ children }) => {
   };
 
   const onLogout = () => {
-    return signOut(auth)
-      .then(() => {
-        setUser(null);
-      })
-      .catch((error) => {
-        console.log("An error happened while signing out: ", error);
-      });
+    setUser(null);
+    signOut(auth);
   };
 
   return (
